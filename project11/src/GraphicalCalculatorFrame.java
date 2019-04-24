@@ -163,7 +163,7 @@ public class GraphicalCalculatorFrame extends JFrame
 
 			// TODO: Draw bounding boxes on all regions (regions are stored as rectangles):
 				for (int i = 0; i > regions.length; i++) {
-					g.drawRect(REGION_START_X + i*REGION_INC_X, REGION_WIDTH, REGION_HEIGHT);
+					g.drawRect(REGION_START_X + i*REGION_INC_X, REGION_START_Y, REGION_WIDTH, REGION_HEIGHT);
 				}
 			
 			// Draw the text at the specified text points:
@@ -198,8 +198,9 @@ public class GraphicalCalculatorFrame extends JFrame
 			}
 
 			// TODO: Draw translucent rectangle over selected region (use the highlight color):
+			Rectangle region = regions[selectedRegion];
 			g.setColor(Color.YELLOW);
-			g.fillRect(), y, width, height);
+			g.fillRect(region.x, region.y, region.width, region.height);
 		}
 
 		/**
@@ -215,8 +216,13 @@ public class GraphicalCalculatorFrame extends JFrame
 		{
 			// If the mouse clicked within a region, set that region to be the selected region.
 			// TODO: check if a clicked point is within a region. If so, set that region to be selected.
-				int x = e.getX();
-			    int y = e.getY();
+				int cordinateX = e.getX();
+			    int cordinateY = e.getY();
+			    for (int i=0; i<regions.length; i++) {
+			    	if(regions[i].contains(cordinateX, cordinateY)){
+			    		selectedRegion = i;
+			    	}
+			    }
 					
 			// Repaint the panel (this will implicitly call paintComponent):
 			this.repaint();
@@ -246,6 +252,7 @@ public class GraphicalCalculatorFrame extends JFrame
 			 *
 			 * Return false if the set operation cannot be done.
 			 */
+			
 
 			this.repaint();
 
@@ -261,6 +268,35 @@ public class GraphicalCalculatorFrame extends JFrame
 		public int evaluate()
 		{
 			// TODO: evaluate the expression. (operand0 operator0 operand1) operator1 operand2
+			int values = 0;
+			int operand0 = operands[0];
+			int operand1 = operands[1];
+			int operand2 = operands[2];
+			
+			String operator0 = operators[0];
+			String operator1 = operators[1];
+			
+			if(operator0.equals("+")) {
+				values = operand0 + operand1;
+			}
+			else if(operator0.equals("-")) {
+				values = operand0 - operand1;
+			}
+			else if(operator0.equals("*")) {
+				values = operand0 * operand1;
+			}
+			
+			if(operator1.equals("+")) {
+				values = values + operand2;
+			}
+			else if(operator1.equals("-")) {
+				values = values - operand2;
+			}
+			else if(operator1.equals("*")) {
+				values = values * operand2;
+			}
+			return values;
+		//	if((operator1 == "*" || operator1 == "/") && (operator2 != "*" || operator2 != "/")) {
 		}
 
 		/** DO NOT MODIFY - DOES NOTHING */
