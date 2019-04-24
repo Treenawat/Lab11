@@ -251,8 +251,43 @@ public class GraphicalCalculatorFrame extends JFrame
 			 * region4 = operand2
 			 *
 			 * Return false if the set operation cannot be done.
-			 */
-			
+			 */		
+			try {
+				if(selectedRegion == 0) {
+						if( Integer.parseInt(content) >= 0 && Integer.parseInt(content) <= 9) {
+							operands[0] = Integer.parseInt(content);
+							success = true;
+						}
+				}
+				if(selectedRegion == 1) {
+						if(content.equals("+") || content.equals("-") || content.equals("*")) {
+							operators[0] = content;
+							success = true;
+						}	
+				}
+				if(selectedRegion == 2) {
+						if(Integer.parseInt(content) >= 0 && Integer.parseInt(content) <= 9) {
+							operands[1] = Integer.parseInt(content);
+							success = true;
+						}
+				}
+				if(selectedRegion == 2) {
+						if(content.equals("+") || content.equals("-") || content.equals("*")) {
+							operators[1] = content;
+							success = true;
+						}
+				}
+				if(selectedRegion == 2) {
+						if(Integer.parseInt(content) >= 0 && Integer.parseInt(content) <= 9) {
+							operands[2] = Integer.parseInt(content);
+							success = true;
+						}
+				}
+			}
+				
+			catch(NumberFormatException num){
+				num.printStackTrace();
+			}
 
 			this.repaint();
 
