@@ -424,12 +424,26 @@ public class GraphicalCalculatorFrame extends JFrame
         this.setLayout(new GridLayout(2, 0));
 
         // TODO: add components to panels
+        panel1.add(operandEntry);
+        panel2.add(multiply);
+        panel2.add(subtract);
+        panel2.add(add);
+        panel3.add(setOperator);
+        panel3.add(setOperand);
+        panel4.add(errorMessage);
 
         // TODO: add radio buttons to the button group
         //default to + operator
+        ops.add(add);
+        ops.add(subtract);
+        ops.add(multiply);
         add.setSelected(true); //remember, the button group ensures only one button is selected
 
         // TODO: add sub-panels into panel 0
+        panel0.add(panel1);
+        panel0.add(panel3);
+        panel0.add(panel2);
+        panel0.add(panel4);
 
         // Adds all panels to frame:
         panel0.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT - 300));
@@ -446,7 +460,14 @@ public class GraphicalCalculatorFrame extends JFrame
          */
         setOperand.addActionListener((e) -> {
         		// TODO: attempt to modify the selected region in gcPanel with the new operand value.
+        	boolean result = gcPanel.setSelectedRegionContents(operandEntry.getText());
+    		if (result == true) {
+    			errorMessage.setText(" ");
+    		}
+        	else {
+        		errorMessage.setText("Failed to set operand value");
         	}
+        }
         );
 
         /*
@@ -461,6 +482,22 @@ public class GraphicalCalculatorFrame extends JFrame
          */
         setOperator.addActionListener((e) -> {
     		// TODO: attempt to modify the selected region in gcPanel with the new operator value.
+        	if(multiply.isSelected()) {
+    			gcPanel.setSelectedRegionContents("*");
+    			errorMessage.setText(" ");
+    		}
+    		else if(subtract.isSelected()) {
+    			gcPanel.setSelectedRegionContents("-");
+    			errorMessage.setText(" ");
+    		}
+    		else if(add.isSelected()) {
+    			gcPanel.setSelectedRegionContents("+");
+    			errorMessage.setText(" ");
+    		}
+    		else {
+    			errorMessage.setText("Failed to set operator value");
+    		}
+        }
         );
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
