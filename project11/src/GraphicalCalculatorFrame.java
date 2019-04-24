@@ -126,8 +126,7 @@ public class GraphicalCalculatorFrame extends JFrame
 			int startY = REGION_START_Y;
 			
 			for (int i = 0; i< regions.length; i++) {
-				regions[i] = new Rectangle(startX + i*REGION_INC_X, startY);
-				regions[i].setSize(REGION_WIDTH, REGION_HEIGHT);
+				regions[i] = new Rectangle(startX + i*REGION_INC_X, startY, REGION_WIDTH, REGION_HEIGHT);
 			}
 		}
 
