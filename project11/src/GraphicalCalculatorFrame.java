@@ -197,9 +197,9 @@ public class GraphicalCalculatorFrame extends JFrame
 			}
 
 			// TODO: Draw translucent rectangle over selected region (use the highlight color):
-			Rectangle region = regions[selectedRegion];
-			g.setColor(Color.YELLOW);
-			g.fillRect(region.x, region.y, region.width, region.height);
+			Rectangle area = regions[selectedRegion];
+			g.setColor(highlight);
+			g.fillRect(area.x, area.y, area.width, area.height);
 		}
 
 		/**
